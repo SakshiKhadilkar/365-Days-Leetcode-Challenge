@@ -2,24 +2,21 @@ class Solution {
 public:
     bool uniqueOccurrences(vector<int>& arr) {
         
-        unordered_map<int,int> mp;
-        unordered_set<int> st;
+        vector<int> vec(2001,0);
         
-        for(int i=0; i<arr.size(); i++){
+        for(auto it: arr){
             
-            mp[arr[i]]++;
+            vec[it+1000]++;
         }
         
-        for(auto it: mp){
+        sort(begin(vec),end(vec));
+        
+        for(int i=1; i<2001; i++){
             
-            if(st.find(it.second) != st.end())
+            if(vec[i] != 0 && vec[i] == vec[i-1])
                 return false;
-            
-            else
-                st.insert(it.second);
         }
         
         return true;
-        
     }
 };
